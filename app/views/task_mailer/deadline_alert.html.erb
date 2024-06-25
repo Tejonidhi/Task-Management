@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Task Deadline Alert</h1>
+    <p>Hello <%= @task.user.email %>,</p>
+    <p>This is a reminder that your task "<%= @task.title %>" is due in <%= @time_frame %>.</p>
+    <p>Task Description: <%= @task.description %></p>
+    <p>Deadline: <%= @task.deadline %></p>
+  </body>
+</html>

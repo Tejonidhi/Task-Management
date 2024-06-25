@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Task Management</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css', media: 'all' %>
+  <%= javascript_include_tag 'https://code.jquery.com/jquery-3.5.1.slim.min.js' %>
+  <%= javascript_include_tag 'https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js' %>
+  <%= javascript_include_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <div class="navbar">
+    <% if user_signed_in? %>
+      Logged in as: <%= current_user.email %>
+      <%= button_to "Sign out", destroy_user_session_path, method: :delete, id: "sign_out_menu_link", class: "dropdown-item btn btn-danger", data: { turbo_method: :delete } %>
+    <% else %>
+    <% end %>
+  </div>
+
+  <div class="container">
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %> alert-dismissible fade show" role="alert">
+        <%= value %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+    <%= yield %>
+  </div>
+
+  <script>
+    $(document).on('turbolinks:load', function() {
+      $(".alert").delay(3000).slideUp(200, function() {
+        $(this).alert('close');
+      });
+    });
+  </script>
+</body>
+</html>

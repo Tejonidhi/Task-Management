@@ -1,0 +1,26 @@
+<h1>Tasks</h1>
+
+<p><%= link_to 'New Task', new_task_path, class: 'btn btn-primary' %></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Deadline</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.status %></td>
+        <td><%= task.deadline.in_time_zone('Asia/Kolkata').strftime('%Y-%m-%d %H:%M:%S %Z') %></td>
+        <td>
+          <%= link_to 'Edit', edit_task_path(task), class: 'btn btn-primary' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
